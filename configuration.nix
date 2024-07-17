@@ -7,13 +7,21 @@
 {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     nix.settings.allowed-users = ["domnuraul"];
+    nixpkgs.config.allowUnfree = true; 
 
     imports = [ 
         ./hardware-configuration.nix
     ];
 
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+    boot = {
+        loader = {
+            grub.enable = true;
+            grub.device = "/dev/sda";
+
+            efi.canTouchEfiVariables = true;
+        };
+	initrd.checkJournalingFS = false;
+    };
 
     networking.hostName = "nixos"; # Define your hostname.
     networking.networkmanager.enable = true;
@@ -32,9 +40,8 @@
         displayManager = {
             sddm = {
                 enable = true;
-                # theme = "rose-pine";
+                theme = "rose-pine";
             };
-            defaultSession = "none+bspwm";
         };
 
         windowManager.awesome.enable = true;
@@ -113,12 +120,6 @@ services.xserver.libinput.enable = true;
 
     system.stateVersion = "24.05"; # Did you read the comment?
 
-    # nixpkgs.config = {
-    #     allowUnfree = true; 
-    #     packageOverrides = pkgs: {
-    #         intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
-    #     };
-    # };
 
 
     # services.xserver.videoDrivers = [ "nouveau" "intel" "modesetting"];
