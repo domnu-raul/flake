@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #PARTITIONING
-nix --experimental-features 'nix-command flakes' run github:nix-community/disko -- --mode disko ./disko-config.nix
+nix --experimental-features 'nix-command flakes' run github:nix-community/disko -- --mode disko ./disko.nix
 
 #HARDWARE CONFIGURATION
 nix-generate-config --root /mnt
