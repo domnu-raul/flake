@@ -15,10 +15,10 @@
 
     boot.loader.systemd-boot.enable = true;
 
-    networking.hostName = "nixos"; # Define your hostname.
+    networking.hostName = "nixos"; 
     networking.networkmanager.enable = true;
     # networking.wireless.enable = true;
-    # networking.wireless.networks."DIGI-RJur".psk = "gxzv9d6m";
+    # networking.wireless.networks."SSID".psk = "PASSWORD";
 
 
     time.timeZone = "Europe/Bucharest";
@@ -52,7 +52,7 @@
     };
 
 # Enable touchpad support (enabled default in most desktopManager).
-services.xserver.libinput.enable = true;
+    services.xserver.libinput.enable = true;
 
 # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.domnuraul = {
@@ -61,16 +61,6 @@ services.xserver.libinput.enable = true;
         extraGroups = [ "audio" "networkmanager" "wheel" ];
     };
 
-    programs.git.enable = true;
-
-    programs.zsh.enable=true;
-
-    programs.neovim = {
-        enable = true;
-        vimAlias = true;
-        viAlias = true;
-        defaultEditor = true;
-    };
 
     virtualisation.docker.enable = true;
     virtualisation.virtualbox.host.enable = true;
@@ -78,7 +68,6 @@ services.xserver.libinput.enable = true;
 
     environment.systemPackages = with pkgs; [
         fzf
-        stow
         wget
         unzip
         xclip 
@@ -87,11 +76,9 @@ services.xserver.libinput.enable = true;
         pavucontrol
         corefonts
         xidlehook
-        flatpak
         htop
 
         ffmpeg-full
-        google-chrome
         vlc
 
         # SDDM theme
@@ -102,44 +89,13 @@ services.xserver.libinput.enable = true;
         clang
         llvm
         rustup
-        nodejs_22
         python3
         lua
-        stylua
-        poetry
-        jdk
     ];
 
     system.stateVersion = "24.05"; # Did you read the comment?
 
-
-
-    # services.xserver.videoDrivers = [ "nouveau" "intel" "modesetting"];
-    # services.xserver.videoDrivers = [ "nvidia"];
-    # hardware.nvidia = {
-    #     open = false;
-    #     nvidiaSettings = true;
-    #     package = config.boot.kernelPackages.nvidiaPackages.stable;
-    #     modesetting.enable = true;
-    #     forceFullCompositionPipeline = true;
-    #     prime = {
-    #         sync.enable = true; # always only run on nvidia
-    #         # offload.enable = true;
-    #
-    #         intelBusId = "PCI:0:2:0";
-    #         nvidiaBusId = "PCI:1:0:0";
-    #     };
-    # };
-    #
-    # hardware.graphics = {
-    #     enable = true;
-    #     extraPackages = with pkgs; [
-    #         intel-media-driver # LIBVA_DRIVER_NAME=iHD
-    #         intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-    #         libvdpau-va-gl
-    #     ];
-    # };
-
+    programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
-    zramSwap.enable = true;
+    # zramSwap.enable = true;
 }

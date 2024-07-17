@@ -24,12 +24,17 @@
     in {
         nixosConfigurations.nixos = lib.nixosSystem {
             inherit system;
-            modules = [ ./configuration.nix ];
-        };
-        homeConfigurations.domnuraul = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            extraSpecialArgs = {inherit spicetify-nix;};
-            modules = [ ./home.nix ];
+            modules = [
+                ./configuration.nix 
+                home-manager.nixosModules.home-manager
+                {
+                    home-manager.useGlobalPkgs = true;
+                    home-manager.useUserPackages = true;
+
+                    home-manager.users.domnuraul = import ./home.nix;
+                    home-manager.extraSpecialArgs = {inherit spicetify-nix;};
+                }
+            ];
         };
     };
 }

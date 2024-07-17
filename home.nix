@@ -22,11 +22,11 @@ in
 
     imports = [ spicetify-nix.homeManagerModule ];
     programs.spicetify =
-    let officialThemesOLD = pkgs.fetchgit {
-        url = "https://github.com/spicetify/spicetify-themes";
-        rev = "c2751b48ff9693867193fe65695a585e3c2e2133";
-        sha256 = "0rbqaxvyfz2vvv3iqik5rpsa3aics5a7232167rmyvv54m475agk";
-    };
+    # let officialThemesOLD = pkgs.fetchgit {
+    #     url = "https://github.com/spicetify/spicetify-themes";
+    #     rev = "c2751b48ff9693867193fe65695a585e3c2e2133";
+    #     sha256 = "0rbqaxvyfz2vvv3iqik5rpsa3aics5a7232167rmyvv54m475agk";
+    # };
     in
     {
         enable = true;
@@ -52,6 +52,16 @@ in
 
     };
 
+    programs.git.enable = true;
+
+    programs.neovim = {
+        enable = true;
+        vimAlias = true;
+        viAlias = true;
+        defaultEditor = true;
+    };
+
+
 
     home.packages = [
         pkgs.starship
@@ -61,17 +71,17 @@ in
         pkgs.kitty
         pkgs.vscode
         pkgs.qbittorrent
+        pkgs.firefox
 
         pkgs.gimp
-        pkgs.maim
+        pkgs.flameshot
         pkgs.neofetch
         pkgs.cmatrix
 
         pkgs.rofi
-        pkgs.polybar
         pkgs.picom
         pkgs.nitrogen
-        pkgs.lxappearance
+        # pkgs.lxappearance
         pkgs.i3lock-color
 
         (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "DejaVuSansMono" "FiraMono" "UbuntuMono"]; })
@@ -117,7 +127,5 @@ in
     };
 
 # Let Home Manager install and manage itself.
-    programs.home-manager = {
-        enable = true;
-    };
+    programs.home-manager.enable = true;
 }
