@@ -32,7 +32,9 @@
                     home-manager.useUserPackages = true;
 
                     home-manager.users.domnuraul = import ./home.nix;
-                    home-manager.extraSpecialArgs = {inherit spicetify-nix;};
+                    home-manager.extraSpecialArgs = {
+                        inherit spicetify-nix;
+                    };
                 }
             ];
         };
