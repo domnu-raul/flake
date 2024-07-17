@@ -13,15 +13,7 @@
         ./hardware-configuration.nix
     ];
 
-    boot = {
-        loader = {
-            grub.enable = true;
-            grub.device = "/dev/sda";
-
-            efi.canTouchEfiVariables = true;
-        };
-	initrd.checkJournalingFS = false;
-    };
+    boot.loader.systemd-boot.enable = true;
 
     networking.hostName = "nixos"; # Define your hostname.
     networking.networkmanager.enable = true;

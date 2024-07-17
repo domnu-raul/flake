@@ -18,7 +18,7 @@
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/F550-C1B2";
-      fsType = "vfat";
+      fsType = "EF00";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
