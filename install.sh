@@ -8,6 +8,7 @@ nixos-generate-config --root /mnt
 cp /mnt/etc/nixos/hardware-configuration.nix .
 
 #INSTALLATION
+mkdir -p /mnt/Flake/tmp
 TMPDIR=/mnt/Flake/tmp nixos-install --flake .#nixos
 
 #COPY CONFIGURATION
